@@ -4,6 +4,10 @@ This project contains an implementation of a convolutional neural network to cla
 # Data
 
 # Requirements
+This project uses the following modules and versions:
+Python 3.7.6
+PyTorch 1.5.0
+NVIDIA CUDA Toolkit 10.2.89
 
 # Setup
 
