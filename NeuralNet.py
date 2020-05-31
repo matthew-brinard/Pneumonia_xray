@@ -15,19 +15,19 @@ class Net(nn.Module):
         self.out = nn.Linear(in_features=100, out_features=2)
 
     def forward(self, x):
-        # Convolution Layer 1
+        # Convolution layer 1
         x = self.conv1(x)
         x = F.relu(x)
         x = F.max_pool2d(x, kernel_size=2, stride=2, padding=0)
-        # Convolution Layer 2
+        # Convolution layer 2
         x = self.conv2(x)
         x = F.relu(x)
         x = F.max_pool2d(x, kernel_size=2, stride=2, padding=0)
-        # Convolution Layer 3
+        # Convolution layer 3
         x = self.conv3(x)
         x = F.relu(x)
         x = F.max_pool2d(x, kernel_size=2, stride=2, padding=0)
-        # Convolution Layer 4
+        # Convolution layer 4
         x = self.conv4(x)
         x = F.relu(x)
         x = F.max_pool2d(x, kernel_size=2, stride=2, padding=0)
