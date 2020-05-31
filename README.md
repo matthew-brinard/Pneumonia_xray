@@ -1,5 +1,5 @@
 # Pneumonia_xray
-This project contains an implementation of a convolutional neural network to classify chest x-ray scans as either normal or containing pneumonia. 
+This project contains an implementation of a convolutional neural network to detect the presence of pneumonia in chest x-ray scans. The model classifies images as either "normal" or "pneumonia".
 
 # Data
 
