@@ -2,8 +2,9 @@
 This project contains an implementation of a convolutional neural network to detect the presence of pneumonia in chest x-ray scans. The model classifies images as either "normal" or "pneumonia".
 
 # Data
+The dataset for this project 
 
-# Requirements
+# Dependencies
 This project uses the following modules and versions:
 * Python 3.7.6
 * PyTorch 1.5.0
