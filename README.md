@@ -1,9 +1,6 @@
 # Pneumonia_xray
 This project contains an implementation of a convolutional neural network to detect the presence of pneumonia in chest x-ray scans. The model classifies images as either "normal" or "pneumonia".
 
-# Data
-The dataset for this project 
-
 # Dependencies
 This project uses the following modules and versions:
 * Python 3.7.6
@@ -20,3 +17,7 @@ This project uses the following modules and versions:
 5. Optional hyperparameters can be changed to save the model, or change training time.
 
 # Results
+
+# References
+* Kermany, Daniel; Zhang, Kang; Goldbaum, Michael (2018), “Labeled Optical Coherence Tomography (OCT) and Chest X-Ray Images for Classification”, Mendeley Data, v2
+http://dx.doi.org/10.17632/rscbjbr9sj.2
