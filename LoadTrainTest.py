@@ -1,31 +1,14 @@
 import torch
 from torchvision import transforms, datasets
-from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader, random_split
 from torch.nn import CrossEntropyLoss
 from torch.optim import SGD
 from NeuralNet import Net
 from Functions import train_model, test_model, plot_history
 
-try:
-    train_dir = './chest_xray/train'
-except Exception as e:
-    print(e)
-    print("Error finding training image directory.")
-
-try:
-    val_dir = './chest_xray/val'
-except Exception as e:
-    print(e)
-    print("Error finding validation image directory.")
-
-try:
-    test_dir = './chest_xray/test'
-except Exception as e:
-    print(e)
-    print("Error finding test image directory.")
 
 # Hyper parameters
-num_epochs = 25
+num_epochs = 10
 img_size = 224
 batch_size = 16
 save_model = False
@@ -55,15 +38,21 @@ image_transforms = {
         ])
 }
 
+# Setup train-test split
+all_data = datasets.ImageFolder(root='./chest_xray')
+train_data_len = int(len(all_data)*.8)
+valid_data_len = int((len(all_data) - train_data_len)/2)
+test_data_len = int(len(all_data) - train_data_len - valid_data_len)
+train_data, val_data, test_data = random_split(all_data, [train_data_len, valid_data_len, test_data_len])
+train_data.dataset.transform = image_transforms['train']
+val_data.dataset.transform = image_transforms['test']
+test_data.dataset.transform = image_transforms['test']
+print(len(train_data), len(val_data), len(test_data))
+
 # Dataloaders
-train_set = datasets.ImageFolder(root=train_dir, transform=image_transforms['train'])
-train_loader = DataLoader(train_set, batch_size=batch_size, shuffle=True)
-
-val_set = datasets.ImageFolder(root=val_dir, transform=image_transforms['train'])
-val_loader = DataLoader(val_set, batch_size=batch_size, shuffle=True)
-
-test_set = datasets.ImageFolder(root=test_dir, transform=image_transforms['test'])
-test_loader = DataLoader(test_set, batch_size=batch_size, shuffle=True)
+train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True)
+val_loader = DataLoader(val_data, batch_size=batch_size, shuffle=True)
+test_loader = DataLoader(test_data, batch_size=batch_size, shuffle=True)
 
 # Place train and validation datasets into a dictionary
 dataloaders_dict = {'train': train_loader, 'val': val_loader}
