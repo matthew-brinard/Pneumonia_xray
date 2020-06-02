@@ -47,7 +47,6 @@ train_data, val_data, test_data = random_split(all_data, [train_data_len, valid_
 train_data.dataset.transform = image_transforms['train']
 val_data.dataset.transform = image_transforms['test']
 test_data.dataset.transform = image_transforms['test']
-print(len(train_data), len(val_data), len(test_data))
 
 # Dataloaders
 train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True)
