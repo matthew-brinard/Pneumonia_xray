@@ -1,5 +1,5 @@
 import time
-import typing
+from typing import Tuple, List
 import copy
 import numpy as np
 import matplotlib.pyplot as plt
@@ -12,7 +12,7 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 
 def train_model(model: Net, dataloader_dict: dict, criterion: torch.nn.modules.loss, optimizer: torch.optim,
-                num_epochs: int = 20) -> typing.Tuple[Net, list[torch.Tensor], list[torch.Tensor]]:
+                num_epochs: int = 20) -> Tuple[Net, List[torch.Tensor], List[torch.Tensor]]:
     """
     This function trains the neural network model.
     :param model: Neural Network model that will be trained on the datasets.
@@ -95,7 +95,7 @@ def test_model(model: Net, test_loader: DataLoader) -> float:
     return test_accuracy
 
 
-def plot_history(t_hist: list[torch.Tensor], v_hist: list[torch.Tensor]) -> None:
+def plot_history(t_hist: List[torch.Tensor], v_hist: List[torch.Tensor]) -> None:
     """
     Plots a graph of the training and validation accuracy vs. epoch.
     :param t_hist: Training accuracy history.
@@ -151,5 +151,3 @@ def class_accuracy(model: Net, test_loader: DataLoader, dataset: Dataset) -> pd.
     class_data = pd.DataFrame(data_tuples, columns=['Class', 'Class Correct', 'Class Total'])
     class_data['Class Accuracy'] = class_data['Class Correct'] / class_data['Class Total']
     return class_data
-
-
