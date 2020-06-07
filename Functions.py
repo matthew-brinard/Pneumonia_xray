@@ -1,11 +1,11 @@
 import time
-from typing import Tuple, List
 import copy
+from typing import Tuple, List
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 import torch
 from torch.utils.data import DataLoader, Dataset
-import pandas as pd
 from NeuralNet import Net
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
