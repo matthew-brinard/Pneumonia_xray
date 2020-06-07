@@ -8,6 +8,7 @@ This project uses the following modules and versions:
 * NVIDIA CUDA Toolkit 10.2.89
 * NumPy 1.18.1
 * Matplotlib 3.2.1
+* Pandas 1.0.3
 
 # Setup
 1. Download the file 'ChestXRay2017.zip' from [here](https://data.mendeley.com/datasets/rscbjbr9sj/2).
