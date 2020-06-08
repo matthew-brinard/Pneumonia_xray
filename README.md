@@ -19,7 +19,7 @@ This project uses the following modules and versions:
 5. Optional hyperparameters can be changed to save the model, change batch size, or change training time.
 
 # Results
-The current implementation yields a test accuracy of 85.90%. The true positive rate is 93.590%. The true negative rate is 73.077%.
+The current implementation yields a test accuracy of 85.90%. The true positive rate of the model is 93.590%. The true negative rate of the model is 73.077%.
 ![Graph of Per Class Accuracy](https://github.com/matthew-brinard/Pneumonia_xray/blob/master/PerClassAccuracy.png)
 ![Graph of training and validation accuracy versus Epoch](https://github.com/matthew-brinard/Pneumonia_xray/blob/master/ModelAccuracy.png)
 
