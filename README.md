@@ -8,6 +8,7 @@ This project uses the following modules and versions:
 * NVIDIA CUDA Toolkit 10.2.89
 * NumPy 1.18.1
 * Matplotlib 3.2.1
+* Seaborn 0.10.1
 * Pandas 1.0.3
 
 # Setup
