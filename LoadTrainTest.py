@@ -4,8 +4,7 @@ from torch.utils.data import DataLoader
 from torch.nn import CrossEntropyLoss
 from torch.optim import SGD
 from NeuralNet import Net
-from Functions import train_model, test_model, plot_history,  class_accuracy
-
+from Functions import train_model, test_model, plot_history, class_accuracy, plot_class_accuracy
 
 try:
     train_dir = './chest_xray/train'
@@ -26,12 +25,12 @@ except Exception as e:
     print('Error finding image directory.')
 
 # Hyper parameters
-num_epochs = 20
+num_epochs = 35
 img_size = 512
 batch_size = 16
 save_model = False
 model_path = './Net.pth'
-torch.manual_seed(0)
+
 
 # Image transforms
 # Uses data augmentations to increase the size of the training image set.
@@ -88,7 +87,9 @@ print('\nThe trained neural net model has an accuracy of {:,.2f}%'.format(test_a
 if save_model:
     torch.save(Net.state_dict(), model_path)
 
-# Print out per class accuracy metrics
-print(class_accuracy(Net, test_loader, test_set))
+# Plot per class accuracy metrics
+class_data = class_accuracy(Net, test_loader, test_set)
+print(class_data)
+plot_class_accuracy(class_data)
 # Plot the model history for training and validation accuracy
 plot_history(t_hist, v_hist)
