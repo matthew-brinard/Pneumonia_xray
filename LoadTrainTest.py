@@ -25,7 +25,7 @@ except Exception as e:
     print('Error finding image directory.')
 
 # Hyper parameters
-num_epochs = 35
+num_epochs = 50
 img_size = 512
 batch_size = 16
 save_model = False
@@ -37,7 +37,7 @@ model_path = './Net.pth'
 image_transforms = {
     'train':
         transforms.Compose([
-            transforms.RandomResizedCrop(size=720, scale=(0.95, 1.0)),
+            transforms.RandomResizedCrop(size=800, scale=(0.95, 1.0)),
             transforms.RandomRotation(degrees=30),
             transforms.RandomHorizontalFlip(),
             transforms.RandomVerticalFlip(),
@@ -81,15 +81,17 @@ Net, t_hist, v_hist = train_model(Net, dataloaders_dict, criterion, optimizer, n
 
 # Test the model on the test data set and print results
 test_accuracy = test_model(Net, test_loader)
-print('\nThe trained neural net model has an accuracy of {:,.2f}%'.format(test_accuracy * 100), 'on the test dataset.\n')
+print('\nThe trained neural net model has an accuracy of {:,.2f}%'.format(test_accuracy*100), 'on the test dataset.\n')
+
+# Plot per class accuracy metrics
+class_data = class_accuracy(Net, test_loader, test_set)
+for index, row in class_data.iterrows():
+    print('Accuracy of class {}: {:.3%}'.format(row['Class'], row['Class Accuracy']))
+plot_class_accuracy(class_data)
+
+# Plot the model history for training and validation accuracy
+plot_history(t_hist, v_hist)
 
 # Saves model if save_model hyper parameter is set to "True"
 if save_model:
     torch.save(Net.state_dict(), model_path)
-
-# Plot per class accuracy metrics
-class_data = class_accuracy(Net, test_loader, test_set)
-print(class_data)
-plot_class_accuracy(class_data)
-# Plot the model history for training and validation accuracy
-plot_history(t_hist, v_hist)
