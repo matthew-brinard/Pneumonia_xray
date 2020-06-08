@@ -19,7 +19,6 @@ except Exception as e:
 if os.path.exists('./chest_xray/val'):
     print('The validation dataset already exists.')
 else:
-    # Take 10% of each class (rounded to the nearest batch) from the training dataset and create the validation dataset.
     os.mkdir('./chest_xray/val')
     os.mkdir('./chest_xray/val/NORMAL')
     os.mkdir('./chest_xray/val/PNEUMONIA')
