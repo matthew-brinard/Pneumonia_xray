@@ -4,10 +4,12 @@ from typing import Tuple, List
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 import torch
 from torch.utils.data import DataLoader, Dataset
 from NeuralNet import Net
 
+sns.set()
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 
@@ -95,32 +97,6 @@ def test_model(model: Net, test_loader: DataLoader) -> float:
     return test_accuracy
 
 
-def plot_history(t_hist: List[torch.Tensor], v_hist: List[torch.Tensor]) -> None:
-    """
-    Plots a graph of the training and validation accuracy vs. epoch.
-    :param t_hist: Training accuracy history.
-    :type t_hist: list of torch.Tensor objects.
-    :param v_hist: Validation accuracy history
-    :type v_hist: list of torch.Tensor objects
-    :return: None
-    """
-    print(type(t_hist))
-    print(type(t_hist[0]))
-    train_hist = [h.cpu().numpy() for h in t_hist]
-    val_hist = [h.cpu().numpy() for h in v_hist]
-
-    plt.title('Model Accuracy')
-    plt.xlabel('Epoch')
-    plt.ylabel('Accuracy')
-    plt.plot(range(1, (len(train_hist) + 1)), train_hist, color='blue', label='Training')
-    plt.plot(range(1, (len(val_hist) + 1)), val_hist, color='orange', label='Validation')
-    plt.legend()
-    plt.ylim((0, 1.0))
-    plt.xticks((np.arange(1, len(train_hist) + 1, 5)))
-    plt.show()
-    return None
-
-
 def class_accuracy(model: Net, test_loader: DataLoader, dataset: Dataset) -> pd.DataFrame:
     """
     Tests the trained neural network model against the test dataset. Returns per class accuracy metrics.
@@ -151,3 +127,41 @@ def class_accuracy(model: Net, test_loader: DataLoader, dataset: Dataset) -> pd.
     class_data = pd.DataFrame(data_tuples, columns=['Class', 'Class Correct', 'Class Total'])
     class_data['Class Accuracy'] = class_data['Class Correct'] / class_data['Class Total']
     return class_data
+
+
+def plot_history(t_hist: List[torch.Tensor], v_hist: List[torch.Tensor]) -> None:
+    """
+    Plots a graph of the training and validation accuracy vs. epoch.
+    :param t_hist: Training accuracy history.
+    :type t_hist: list of torch.Tensor objects.
+    :param v_hist: Validation accuracy history
+    :type v_hist: list of torch.Tensor objects
+    :return: None
+    """
+    train_hist = [h.cpu().numpy() for h in t_hist]
+    val_hist = [h.cpu().numpy() for h in v_hist]
+    plt.title('Model Accuracy')
+    plt.xlabel('Epoch')
+    plt.ylabel('Accuracy')
+    plt.plot(range(1, (len(train_hist) + 1)), train_hist, color='blue', label='Training')
+    plt.plot(range(1, (len(val_hist) + 1)), val_hist, color='orange', label='Validation')
+    plt.legend()
+    plt.ylim((0, 1.0))
+    plt.xticks((np.arange(1, len(train_hist) + 1, 4)))
+    plt.show()
+    return None
+
+
+def plot_class_accuracy(class_data: pd.DataFrame) -> None:
+    top_plot = sns.barplot(x=class_data['Class'], y=class_data['Class Total'], color='#9b59b6')
+    bot_plot = sns.barplot(x=class_data['Class'], y=class_data['Class Correct'], color='#3498db')
+    top_bar = plt.Rectangle((0, 0), 1, 1, fc='#9b59b6', edgecolor='none')
+    bot_bar = plt.Rectangle((0, 0), 1, 1, fc='#3498db', edgecolor='none')
+    legend = plt.legend([bot_bar, top_bar], ['Correct', 'Total'], loc=4, ncol=4, prop={'size': 12}) #fix legend
+    legend.draw_frame(False)
+    sns.despine(left=True)
+    bot_plot.set_ylabel("# of Images")
+    bot_plot.set_xlabel("Class")
+    bot_plot.set_title("Model Per Class Accuracy")
+    plt.show()
+    return None
