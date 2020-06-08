@@ -25,14 +25,12 @@ else:
     os.mkdir('./chest_xray/val/PNEUMONIA')
 
     train_normal = os.listdir(train_NORMAL_dir)
-    num_normal_batches = int((len(train_normal)*0.1)/16)
-    for file in random.sample(train_normal, (16 * num_normal_batches)):
+    for file in random.sample(train_normal, 80):
         path_normal = os.path.join(train_NORMAL_dir, file)
         shutil.move(path_normal, './chest_xray/val/NORMAL')
 
     train_pneumonia = os.listdir(train_PNEUMONIA_dir)
-    num_pneumonia_batches = int((len(train_pneumonia) * 0.1) / 16)
-    for file in random.sample(train_pneumonia, (16 * num_pneumonia_batches)):
+    for file in random.sample(train_pneumonia, 80):
         path_pneumonia = os.path.join(train_PNEUMONIA_dir, file)
         shutil.move(path_pneumonia, './chest_xray/val/PNEUMONIA')
 
