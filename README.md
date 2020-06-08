@@ -19,6 +19,9 @@ This project uses the following modules and versions:
 5. Optional hyperparameters can be changed to save the model, change batch size, or change training time.
 
 # Results
+The current implementation yields a test accuracy of 85.90%. 
+![Graph of Per Class Accuracy](https://github.com/matthew-brinard/Pneumonia_xray/blob/master/PerClassAccuracy.png)
+![Graph of training and validation accuracy versus Epoch](https://github.com/matthew-brinard/Pneumonia_xray/blob/master/ModelAccuracy.png)
 
 # References
 * Kermany, Daniel; Zhang, Kang; Goldbaum, Michael (2018), “Labeled Optical Coherence Tomography (OCT) and Chest X-Ray Images for Classification”, Mendeley Data, v2
