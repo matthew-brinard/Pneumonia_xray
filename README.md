@@ -16,7 +16,7 @@ This project uses the following modules and versions:
 2. Extract the folder 'chest_xray' to the relative directory of the files 'LoadTrainTest.py', 'NeuralNet.py', 'CreateValidationSet.py', and 'Functions.py'
 3. Run the file 'CreateValidationSet.py' to create and populate the validation dataset folders.
 4. Run the file 'LoadTrainTest.py' to load the data, train the neural network model, and test the model against the test dataset.
-5. Optional hyperparameters can be changed to save the model, or change training time.
+5. Optional hyperparameters can be changed to save the model, change batch size, or change training time.
 
 # Results
 
