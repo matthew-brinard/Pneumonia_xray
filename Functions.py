@@ -63,7 +63,7 @@ def train_model(model: Net, dataloader_dict: dict, criterion: torch.nn.modules.l
             print('{} Accuracy: {:,.2f}% Loss: {:,.2f}'.format(phase, (epoch_acc * 100), (epoch_loss * 100)))
             if phase == 'train':
                 train_acc_history.append(epoch_acc)
-            if phase == 'val' and epoch_acc > best_acc:
+            if phase == 'val' and epoch_acc >= best_acc:
                 best_acc = epoch_acc
                 best_model = copy.deepcopy(model.state_dict())
                 best_epoch = epoch + 1
