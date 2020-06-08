@@ -140,6 +140,7 @@ def plot_history(t_hist: List[torch.Tensor], v_hist: List[torch.Tensor]) -> None
     """
     train_hist = [h.cpu().numpy() for h in t_hist]
     val_hist = [h.cpu().numpy() for h in v_hist]
+    plt.figure()
     plt.title('Model Accuracy')
     plt.xlabel('Epoch')
     plt.ylabel('Accuracy')
@@ -153,14 +154,20 @@ def plot_history(t_hist: List[torch.Tensor], v_hist: List[torch.Tensor]) -> None
 
 
 def plot_class_accuracy(class_data: pd.DataFrame) -> None:
+    """
+    Plots a layered bar chart graph displaying total images per class and images correct per class.
+    :param class_data: DataFrame containing class label, class correct, and class total.
+    :type class_data: pandas.core.frame.DataFrame
+    :return: None
+    """
     top_plot = sns.barplot(x=class_data['Class'], y=class_data['Class Total'], color='#9b59b6')
     bot_plot = sns.barplot(x=class_data['Class'], y=class_data['Class Correct'], color='#3498db')
     top_bar = plt.Rectangle((0, 0), 1, 1, fc='#9b59b6', edgecolor='none')
     bot_bar = plt.Rectangle((0, 0), 1, 1, fc='#3498db', edgecolor='none')
-    legend = plt.legend([bot_bar, top_bar], ['Correct', 'Total'], loc=4, ncol=4, prop={'size': 12}) #fix legend
+    legend = plt.legend([bot_bar, top_bar], ['Correct', 'Incorrect'], prop={'size': 12})
     legend.draw_frame(False)
     sns.despine(left=True)
-    bot_plot.set_ylabel("# of Images")
+    bot_plot.set_ylabel("Total Number of Images")
     bot_plot.set_xlabel("Class")
     bot_plot.set_title("Model Per Class Accuracy")
     plt.show()
