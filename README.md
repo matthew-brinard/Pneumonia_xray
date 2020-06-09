@@ -1,5 +1,5 @@
 # Pneumonia_xray
-This project contains an implementation of a convolutional neural network to detect the presence of pneumonia in chest x-ray scans. The model classifies chest x-ray images as either "normal" or "pneumonia". The dataset is inherently unbalanced as 25.7% of the training dataset belongs to the "normal" class, and 37.5% of the test dataset belongs to the "normal" class. Due to the unbalanced nature of the dataset and the relative difficulty in differentiation between "normal" and "pneumonia" chest x-rays, this dataset presents a challenging binary classification problem.
+This project contains an implementation of a convolutional neural network to detect the presence of pneumonia in chest x-ray scans. The model classifies chest x-ray images as either "normal" or "pneumonia". The dataset is inherently unbalanced as 25.7% of the training dataset belongs to the "normal" class, and 37.5% of the test dataset belongs to the "normal" class. Due to the unbalanced nature of this dataset and the relative difficulty in differentiation between "normal" and "pneumonia" chest x-rays, this dataset presents a challenging binary classification problem.
 
 # Dependencies
 This project uses the following modules and versions:
