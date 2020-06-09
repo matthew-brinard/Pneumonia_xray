@@ -22,7 +22,9 @@ This project uses the following modules and versions:
 The current implementation yields a test accuracy of 85.90%. The sensitivity of the model is 93.590% and the specificity of the model is 73.077%.
 
 The following graph shows the count of correct and incorrect predictions for each class as a proportion of the the total images of each class in the test dataset.
+
 ![Graph of Per Class Accuracy](https://github.com/matthew-brinard/Pneumonia_xray/blob/master/PerClassAccuracy.png)
+
 This graph depicts the change in accuracy on the training and validation datasets as training time increases.
 ![Graph of training and validation accuracy versus Epoch](https://github.com/matthew-brinard/Pneumonia_xray/blob/master/ModelAccuracy.png)
 
