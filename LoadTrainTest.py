@@ -27,7 +27,7 @@ except Exception as e:
 # Hyper parameters
 num_epochs = 50
 img_size = 512
-batch_size = 16
+batch_size = 32
 save_model = False
 model_path = './Net.pth'
 
