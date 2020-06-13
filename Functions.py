@@ -62,13 +62,13 @@ def train_model(model: Net, dataloader_dict: dict, criterion: torch.nn.modules.l
             epoch_acc = running_corrects / (len(dataloader_dict[phase]) * dataloader_dict[phase].batch_size)
             print('{} Accuracy: {:,.2f}% Loss: {:,.2f}'.format(phase, (epoch_acc * 100), (epoch_loss * 100)))
             if phase == 'train':
-                train_acc_history.append(epoch_acc)
+                train_acc_history.append(epoch_acc.detach())
             if phase == 'val' and epoch_acc >= best_acc:
                 best_acc = epoch_acc
                 best_model = copy.deepcopy(model.state_dict())
                 best_epoch = epoch + 1
             if phase == 'val':
-                val_acc_history.append(epoch_acc)
+                val_acc_history.append(epoch_acc.detach())
     total_time = time.time() - since
     print('Training finished in {:.0f}m {:.0f}s'.format(total_time // 60, total_time % 60))
     print('Best validation accuracy: {:,.2f}% at epoch {:.0f}'.format(best_acc * 100, best_epoch))
