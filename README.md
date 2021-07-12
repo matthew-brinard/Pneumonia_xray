@@ -19,7 +19,7 @@ This project uses the following modules and versions:
 5. Optional hyperparameters can be changed to save the model, change batch size, or change training time.
 
 # Results
-The current implementation yields a test accuracy of 85.90%. The sensitivity of the model is 93.590% and the specificity of the model is 73.077%.
+The current implementation yields a test accuracy of 85.90%. The sensitivity of the model is 97.179% and the specificity of the model is 67.094%.
 
 The following graph shows the count of correct and incorrect predictions for each class as a proportion of the the total images of each class in the test dataset.
 
