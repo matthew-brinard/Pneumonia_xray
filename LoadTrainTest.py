@@ -25,35 +25,28 @@ except Exception as e:
     print('Error finding image directory.')
 
 # Hyper parameters
-num_epochs = 50
-img_size = 512
-batch_size = 32
+num_epochs = 20
+img_size = 224
+batch_size = 16
 save_model = False
 model_path = './Net.pth'
 
-
 # Image transforms
-# Uses data augmentations to increase the size of the training image set.
 image_transforms = {
     'train':
-        transforms.Compose([
-            transforms.RandomResizedCrop(size=800, scale=(0.95, 1.0)),
-            transforms.RandomRotation(degrees=30),
-            transforms.RandomHorizontalFlip(),
-            transforms.RandomVerticalFlip(),
-            transforms.CenterCrop(size=img_size),
-            transforms.ToTensor(),
-            transforms.Normalize([0.485, 0.456, 0.406],
-                                 [0.229, 0.224, 0.225])
-        ]),
+        transforms.Compose([transforms.Resize(size=(img_size) * 2),
+                            transforms.CenterCrop(size=img_size),
+                            transforms.ToTensor(),
+                            transforms.Normalize([0.485, 0.456, 0.406],
+                                                 [0.229, 0.224, 0.225])
+                            ]),
     'test':
-        transforms.Compose([
-            transforms.Resize(size=img_size),
-            transforms.CenterCrop(size=img_size),
-            transforms.ToTensor(),
-            transforms.Normalize([0.485, 0.456, 0.406],
-                                 [0.229, 0.224, 0.225])
-        ])
+        transforms.Compose([transforms.Resize(size=(img_size) * 2),
+                            transforms.CenterCrop(size=img_size),
+                            transforms.ToTensor(),
+                            transforms.Normalize([0.485, 0.456, 0.406],
+                                                 [0.229, 0.224, 0.225])
+                            ])
 }
 
 train_set = datasets.ImageFolder(root=train_dir, transform=image_transforms['train'])
@@ -73,7 +66,8 @@ Net = Net()
 Net.to('cuda:0' if torch.cuda.is_available() else 'cpu')
 
 # Initialize the loss function and optimizer
-criterion = CrossEntropyLoss()
+criterion = CrossEntropyLoss(weight=torch.tensor([3, 1], dtype=torch.float32)).to(
+    'cuda:0' if torch.cuda.is_available() else 'cpu')
 optimizer = SGD(Net.parameters(), lr=0.001, momentum=.92)
 
 # Train the model
@@ -81,7 +75,8 @@ Net, t_hist, v_hist = train_model(Net, dataloaders_dict, criterion, optimizer, n
 
 # Test the model on the test data set and print results
 test_accuracy = test_model(Net, test_loader)
-print('\nThe trained neural net model has an accuracy of {:,.2f}%'.format(test_accuracy*100), 'on the test dataset.\n')
+print('\nThe trained neural net model has an accuracy of {:,.2f}%'.format(test_accuracy * 100),
+      'on the test dataset.\n')
 
 # Plot per class accuracy metrics
 class_data = class_accuracy(Net, test_loader, test_set)
