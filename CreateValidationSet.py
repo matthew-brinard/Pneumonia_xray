@@ -2,7 +2,8 @@ import os
 import random
 import shutil
 
-random.seed(0)
+random.seed(3)
+prctTrainingSet = .05
 
 try:
     train_NORMAL_dir = './chest_xray/train/NORMAL'
@@ -24,12 +25,12 @@ else:
     os.mkdir('./chest_xray/val/PNEUMONIA')
 
     train_normal = os.listdir(train_NORMAL_dir)
-    for file in random.sample(train_normal, 128):
+    for file in random.sample(train_normal, int(len(train_normal) * prctTrainingSet)):
         path_normal = os.path.join(train_NORMAL_dir, file)
         shutil.move(path_normal, './chest_xray/val/NORMAL')
 
     train_pneumonia = os.listdir(train_PNEUMONIA_dir)
-    for file in random.sample(train_pneumonia, 352):
+    for file in random.sample(train_pneumonia, int(len(train_pneumonia) * prctTrainingSet)):
         path_pneumonia = os.path.join(train_PNEUMONIA_dir, file)
         shutil.move(path_pneumonia, './chest_xray/val/PNEUMONIA')
 
