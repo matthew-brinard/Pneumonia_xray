@@ -13,13 +13,9 @@ class Net(nn.Module):
         self.bn3 = nn.BatchNorm2d(num_features=64)
         self.conv4 = nn.Conv2d(in_channels=64, out_channels=128, kernel_size=3, stride=1, padding=0)
         self.bn4 = nn.BatchNorm2d(num_features=128)
-        self.conv5 = nn.Conv2d(in_channels=128, out_channels=256, kernel_size=3, stride=1, padding=0)
-        self.bn5 = nn.BatchNorm2d(num_features=256)
-        self.conv6 = nn.Conv2d(in_channels=256, out_channels=512, kernel_size=3, stride=1, padding=0)
-        self.bn6 = nn.BatchNorm2d(num_features=512)
 
-        self.fc1 = nn.Linear(in_features=512 * 6 * 6, out_features=5000)
-        self.fc2 = nn.Linear(in_features=5000, out_features=500)
+        self.fc1 = nn.Linear(in_features=128 * 12 * 12, out_features=10000)
+        self.fc2 = nn.Linear(in_features=10000, out_features=500)
         self.out = nn.Linear(in_features=500, out_features=2)
 
     def forward(self, x):
@@ -43,18 +39,8 @@ class Net(nn.Module):
         x = self.bn4(x)
         x = F.relu(x)
         x = F.max_pool2d(x, kernel_size=2, stride=2, padding=0)
-        # Convolution layer 5
-        x = self.conv5(x)
-        x = self.bn5(x)
-        x = F.relu(x)
-        x = F.max_pool2d(x, kernel_size=2, stride=2, padding=0)
-        # Convolution layer 6
-        x = self.conv6(x)
-        x = self.bn6(x)
-        x = F.relu(x)
-        x = F.max_pool2d(x, kernel_size=2, stride=2, padding=0)
         # Reshape tensor
-        x = x.reshape(-1, 512 * 6 * 6)
+        x = x.reshape(-1, 128 * 12 * 12)
         # Fully connected layer 1
         x = self.fc1(x)
         x = F.relu(x)
