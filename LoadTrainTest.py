@@ -66,7 +66,7 @@ Net = Net()
 Net.to('cuda:0' if torch.cuda.is_available() else 'cpu')
 
 # Initialize the loss function and optimizer
-criterion = CrossEntropyLoss(weight=torch.tensor([3, 1], dtype=torch.float32)).to(
+criterion = CrossEntropyLoss(weight=torch.tensor([1, 0.25], dtype=torch.float32)).to(
     'cuda:0' if torch.cuda.is_available() else 'cpu')
 optimizer = SGD(Net.parameters(), lr=0.001, momentum=.92)
 
